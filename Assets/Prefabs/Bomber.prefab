@@ -10077,6 +10077,8 @@ GameObject:
   m_Component:
   - component: {fileID: 569556113213979074}
   - component: {fileID: 478807444418988566}
+  - component: {fileID: 6644823341332361322}
+  - component: {fileID: 5903702194085699382}
   m_Layer: 0
   m_Name: Bomber
   m_TagString: Untagged
@@ -10091,7 +10093,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 572094516062466246}
-  m_LocalRotation: {x: -0, y: 0.9909389, z: -0, w: 0.13431408}
+  m_LocalRotation: {x: 0, y: 0.9909387, z: 0, w: 0.13431482}
   m_LocalPosition: {x: -1.77, y: 0, z: 2.214}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
@@ -10121,6 +10123,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &6644823341332361322
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572094516062466246}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &5903702194085699382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572094516062466246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9bea164280bb04fb4e466c5143ae5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &572104121441068792
 GameObject:
   m_ObjectHideFlags: 0
