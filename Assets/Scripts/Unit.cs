@@ -3,32 +3,84 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// INHERITANCE
 public class Unit : Entity
 {
     private NavMeshAgent _navAgent;
 
     protected bool hasPath;
 
+    // ENCAPSULATION
+    public Vector3 TargetPosition { get; private set; }
+    public Entity TargetEntity { get; private set; }
+    public bool HasTarget { get; private set; }
+    
+    [SerializeField]
+    private int _attackDamage;
+
     protected virtual void Start()
     {
-        Debug.Log("Unit Start()");
         _navAgent = GetComponent<NavMeshAgent>();
     }
 
+    // ABSTRACTION
     protected virtual void Update()
     {
-        hasPath = _navAgent.hasPath;
+        if(HasTarget && !TargetEntity) // Target probably died and got destroyed
+        {
+            ClearTarget();
+        }
+
+        if (HasTarget)
+        {
+            if(!(TargetEntity as Castle)) // Target is able to move
+            {
+                TargetPosition = TargetEntity.gameObject.transform.position; // Update target position to new position
+            }
+            MoveToPoint(TargetPosition);
+        }
 
         Debug.DrawLine(transform.position, _navAgent.destination); // DEBUG
     }
 
-    protected void MoveToPoint(Vector3 point)
+    private void MoveToPoint(Vector3 point)
     {
         _navAgent.SetDestination(point);
     }
 
-    protected void Attack(Transform target)
+    public void SetTarget(Vector3 position, Entity entity)
     {
-        throw new System.NotImplementedException();
+        TargetPosition = position;
+        TargetEntity = entity;
+        HasTarget = true;
+    }
+
+    protected void ClearTarget()
+    {
+        TargetPosition = Vector3.zero;
+        TargetEntity = null;
+        HasTarget = false;
+    }
+
+    // ABSTRACTION
+    protected virtual void Attack(Entity target)
+    {
+        // Subtract health from target
+        TargetEntity.SubtractHealth(_attackDamage);
+
+        Debug.Log($"Attacked {TargetEntity}, health is now {TargetEntity.Health}");
+    }
+
+    // POLYMORPHISM
+    protected override void Die()
+    {
+        Debug.Log($"{gameObject} is now dying!");
+
+        base.Die();
+    }
+
+    private void OnDestroy()
+    {
+        ClearTarget();
     }
 }

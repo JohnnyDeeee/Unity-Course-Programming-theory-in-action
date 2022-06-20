@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public int Health { get; protected set; }
+    [SerializeField]
+    private int _health;
 
+    // ENCAPSULATION
+    public int Health { get { return _health; } protected set { _health = value; } }
+
+    // ABSTRACTION
     public void SubtractHealth(int amount)
     {
-        if (Health - amount < 0)
+        if (_health - amount <= 0)
         {
             // Make sure we don't go below 0
-            Health = 0;
+            _health = 0;
 
-            OnDie();
+            Die();
         } else
         {
-            Health -= amount;
+            _health -= amount;
         }
     }
 
-    // TODO: Better name?
-    protected void OnDie() { 
-        //
+    // ABSTRACTION
+    protected virtual void Die() {
+        Destroy(gameObject);
     }
 }
